@@ -3,24 +3,24 @@
 var PROPERTY_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var ADS_NUMBER = 8;
 var PIN_X_MIN = 100;
-var PIN_X_MAX = 500;
+var PIN_X_MAX = 1100;
 var PIN_Y_MIN = 130;
 var PIN_Y_MAX = 630;
 var PIN_HEIGHT = 84;
 var PIN_WIDTH = 72;
 
 var createRandomNumber = function (min, max) {
-  var rand = min + Math.random() * (max + 1 - min); //max+1
-    rand = Math.floor(rand);
-    return rand;
-}
+  var rand = min + Math.random() * (max + 1 - min);
+  rand = Math.floor(rand);
+  return rand;
+};
 
 var getPropertyType = function (arr) {
   var arrRandNumber = Math.floor(Math.random() * arr.length);
   return arr[arrRandNumber];
-}
+};
 
-var createAvatars = function() {
+var createAvatars = function () {
   var avatars = [];
   for (var i = 1; i < ADS_NUMBER + 1; i++) {
     if (i < 10) {
@@ -34,30 +34,23 @@ var createAvatars = function() {
 
 var avatarsList = createAvatars();
 
-var getNumberFromArray = function (arr) {
-  for (i = 0; i < arr.length; i++) {
-    var a = arr[i];
-  }
-};
-
 var getPropertyList = function (number) {
   var properties = [];
   for (var i = 0; i < number; i++) {
     var property = {
-  "author": {
-    "avatar": avatarsList[i]
-  },
-  "offer": {
-    "type": getPropertyType(PROPERTY_TYPES)
-  },
+      author: {
+        'avatar': avatarsList[i]
+      },
+      offer: {
+        'type': getPropertyType(PROPERTY_TYPES)
+      },
 
-  "location": {
-    "x": createRandomNumber(PIN_X_MIN, PIN_X_MAX),
-    "y": createRandomNumber(PIN_Y_MIN, PIN_Y_MAX)
-  }
-};
-
-  properties.push(property);
+      location: {
+        'x': createRandomNumber(PIN_X_MIN, PIN_X_MAX),
+        'y': createRandomNumber(PIN_Y_MIN, PIN_Y_MAX)
+      }
+    };
+    properties.push(property);
   }
   return properties;
 };
@@ -70,12 +63,12 @@ map.classList.remove('map--faded');
 
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
-  markerElement.children[0].style.left = marker.location.x - PIN_HEIGHT + 'px';
-  markerElement.children[0].style.top = marker.location.y - PIN_WIDTH / 2 + 'px';
-  markerElement.children[0].src = marker.author.avatar;
-  markerElement.children[0].alt = 'Заголовок объявления';
+  markerElement.style.left = marker.location.x - PIN_HEIGHT + 'px';
+  markerElement.style.top = marker.location.y - PIN_WIDTH / 2 + 'px';
+  markerElement.querySelector('img').src = marker.author.avatar;
+  markerElement.querySelector('img').alt = 'Заголовок объявления';
   return markerElement;
-}
+};
 
 var mapPins = document.querySelector('.map__pins');
 var markerTemplate = document
