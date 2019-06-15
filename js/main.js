@@ -2,12 +2,12 @@
 
 var PROPERTY_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var ADS_NUMBER = 8;
-var PIN_X_MIN = 100;
-var PIN_X_MAX = 1100;
+var PIN_X_MIN = 0;
+var PIN_X_MAX = 1200;
 var PIN_Y_MIN = 130;
 var PIN_Y_MAX = 630;
-var PIN_HEIGHT = 84;
-var PIN_WIDTH = 72;
+var PIN_HEIGHT = 70;
+var PIN_WIDTH = 50;
 
 var createRandomNumber = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -63,8 +63,8 @@ map.classList.remove('map--faded');
 
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
-  markerElement.style.left = marker.location.x - PIN_HEIGHT + 'px';
-  markerElement.style.top = marker.location.y - PIN_WIDTH / 2 + 'px';
+  markerElement.style.left = marker.location.x - PIN_WIDTH / 2  + 'px';
+  markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
   markerElement.querySelector('img').src = marker.author.avatar;
   markerElement.querySelector('img').alt = 'Заголовок объявления';
   return markerElement;
