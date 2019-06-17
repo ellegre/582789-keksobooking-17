@@ -57,10 +57,6 @@ var getPropertyList = function (number) {
 
 var propertyList = getPropertyList(ADS_NUMBER);
 
-var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-
-
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
   markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
@@ -82,5 +78,43 @@ var fragment = document.createDocumentFragment();
 for (var j = 0; j < propertyList.length; j++) {
   fragment.appendChild(createMarker(propertyList[j]));
 }
+;
 
-mapPins.appendChild(fragment);
+//Активация карты
+
+var map = document.querySelector('.map');
+var mapFilter = document.querySelector('.map__filters');
+var mapFeatures = document.querySelectorAll('.map__features');
+var adForm = document.querySelector('.ad-form');
+var adFormHeader = document.querySelector('.ad-form-header');
+
+
+var activateMap = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  mapFilter.classList.remove('map__filters--disabled');
+  adFormHeader.classList.remove('ad-form-header--disabled');
+  for (var i = 0; i < formElements.length; i++) {
+  var item = formElements[i];
+  item.classList.remove('ad-form__element--disabled');
+  }
+  mapPins.appendChild(fragment);
+}
+
+
+
+mapFilter.classList.add('map__filters--disabled');
+adFormHeader.classList.add('ad-form-header--disabled');
+
+var formElements = document.querySelectorAll('.ad-form__element');
+
+for (var i = 0; i < formElements.length; i++) {
+  var item = formElements[i];
+  item.classList.add('ad-form__element--disabled');
+}
+
+ var mapPinMain = document.querySelector('.map__pin--main');
+mapPinMain.addEventListener('click', function () {
+  activateMap();
+});
+
