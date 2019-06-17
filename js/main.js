@@ -63,7 +63,7 @@ map.classList.remove('map--faded');
 
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
-  markerElement.style.left = marker.location.x - PIN_WIDTH / 2  + 'px';
+  markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
   markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
   markerElement.querySelector('img').src = marker.author.avatar;
   markerElement.querySelector('img').alt = 'Заголовок объявления';
