@@ -85,7 +85,8 @@ var map = document.querySelector('.map');
 var mapFilter = document.querySelector('.map__filters');
 var adForm = document.querySelector('.ad-form');
 var adFormHeader = document.querySelector('.ad-form-header');
-
+var address = document.querySelector('#address');
+var mapPinMain = document.querySelector('.map__pin--main');
 
 var activateMap = function () {
   map.classList.remove('map--faded');
@@ -94,8 +95,9 @@ var activateMap = function () {
   adFormHeader.classList.remove('ad-form-header--disabled');
   for (var i = 0; i < formElements.length; i++) {
     var item = formElements[i];
-    item.removeAttribute('disable');
+    item.disabled = false;
   }
+  address.value = leftPos - PIN_WIDTH / 2 + ', ' + (topPos - PIN_HEIGHT);
   mapPins.appendChild(fragment);
 };
 
@@ -106,24 +108,54 @@ var formElements = document.querySelectorAll('.ad-form__element');
 
 for (var i = 0; i < formElements.length; i++) {
   var item = formElements[i];
-  item.setAttribute('disable', 'disable');
+  item.disabled = true;
 }
 
-var mapPinMain = document.querySelector('.map__pin--main');
+var topPos = mapPinMain.offsetTop;
+var leftPos = mapPinMain.offsetLeft;
+
+address.value = leftPos + ', ' + topPos;
+
 mapPinMain.addEventListener('mouseup', function () {
   activateMap();
 });
 
-function getCoords(elem) {
-  var box = elem.getBoundingClientRect();
 
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
-}
+// Валидация формы
 
-var coords = Math.round((getCoords(mapPinMain).left - PIN_WIDTH / 2)) + ', ' + Math.round((getCoords(mapPinMain).top - PIN_HEIGHT));
+address.readonly = true;
+var title = document.querySelector('#title');
+title.setAttribute('minlength', '30');
+title.setAttribute('maxlength', '100');
 
-var address = document.querySelector('#address');
-address.value = coords;
+var price = document.querySelector('#price');
+price.required = true;
+price.max = 1000000;
+
+var type = document.querySelector('#type');
+type.addEventListener('change', function () {
+  var opt = type.options[type.selectedIndex];
+  if (opt.value === 'bungalo') {
+    price.min = 0;
+    price.placeholder = '0';
+  } else if (opt.value === 'flat') {
+    price.min = 1000;
+    price.placeholder = '1000';
+  } else if (opt.value === 'palace') {
+    price.min = 10000;
+    price.placeholder = '10000';
+  } else {
+    price.min = 5000;
+    price.placeholder = '5000';
+  }
+});
+
+/* var checkInCheckOut = {
+  'После 12': 'Выезд до 12',
+  'После 13': 'Выезд до 13',
+  'После 14': 'Выезд до 14'
+};
+
+var checkIn = document.querySelector('#timein');
+var checkOut = document.querySelector('#timeout');
+*/
