@@ -8,6 +8,9 @@ var PIN_Y_MIN = 130;
 var PIN_Y_MAX = 630;
 var PIN_HEIGHT = 70;
 var PIN_WIDTH = 50;
+var OFFSET_HEIGHT = 65;
+var OFFSET_WIDTH = 65;
+var TIP_HEIGHT = 22;
 
 var createRandomNumber = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -97,7 +100,7 @@ var activateMap = function () {
     var item = formElements[i];
     item.disabled = false;
   }
-  address.value = leftPos - PIN_WIDTH / 2 + ', ' + (topPos - PIN_HEIGHT);
+  address.value = leftPos + ', ' + (topPos + OFFSET_HEIGHT / 2 + TIP_HEIGHT);
   mapPins.appendChild(fragment);
 };
 
@@ -111,51 +114,11 @@ for (var i = 0; i < formElements.length; i++) {
   item.disabled = true;
 }
 
-var topPos = mapPinMain.offsetTop;
-var leftPos = mapPinMain.offsetLeft;
+var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
+var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
 
 address.value = leftPos + ', ' + topPos;
 
 mapPinMain.addEventListener('mouseup', function () {
   activateMap();
 });
-
-
-// Валидация формы
-
-address.readonly = true;
-var title = document.querySelector('#title');
-title.setAttribute('minlength', '30');
-title.setAttribute('maxlength', '100');
-
-var price = document.querySelector('#price');
-price.required = true;
-price.max = 1000000;
-
-var type = document.querySelector('#type');
-type.addEventListener('change', function () {
-  var opt = type.options[type.selectedIndex];
-  if (opt.value === 'bungalo') {
-    price.min = 0;
-    price.placeholder = '0';
-  } else if (opt.value === 'flat') {
-    price.min = 1000;
-    price.placeholder = '1000';
-  } else if (opt.value === 'palace') {
-    price.min = 10000;
-    price.placeholder = '10000';
-  } else {
-    price.min = 5000;
-    price.placeholder = '5000';
-  }
-});
-
-/* var checkInCheckOut = {
-  'После 12': 'Выезд до 12',
-  'После 13': 'Выезд до 13',
-  'После 14': 'Выезд до 14'
-};
-
-var checkIn = document.querySelector('#timein');
-var checkOut = document.querySelector('#timeout');
-*/
