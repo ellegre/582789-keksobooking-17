@@ -132,3 +132,35 @@ mapPinMain.addEventListener('mouseup', function () {
   activateMap();
 });
 
+// Валидация формы
+
+address.readonly = true;
+var title = document.querySelector('#title');
+title.setAttribute('minlength', '30');
+title.setAttribute('maxlength', '100');
+
+var price = document.querySelector('#price');
+price.required = true;
+price.max = 1000000;
+
+var propertySelect = {
+  'bungalo': 0,
+  'flat': 1000,
+  'house': 5000,
+  'palace': 10000
+};
+
+var type = document.querySelector('#type');
+type.addEventListener('change', function () {
+  price.min = propertySelect[type.value];
+  price.placeholder = propertySelect[type.value];
+});
+
+var boundSelects = function () {
+  var checkIn = document.querySelector('#timein');
+  var checkOut = document.querySelector('#timeout');
+  checkIn.addEventListener('change', function () {
+    checkOut.value = checkIn.value;
+  });
+};
+boundSelects();
