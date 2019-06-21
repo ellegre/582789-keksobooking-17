@@ -100,6 +100,10 @@ var activateMap = function () {
     var item = formElements[i];
     item.disabled = false;
   }
+  for (j = 0; j < mapFilters.length; j++) {
+    var item2 = mapFilters[j];
+    item2.disabled = false;
+  }
   address.value = leftPos + ', ' + (topPos + OFFSET_HEIGHT / 2 + TIP_HEIGHT);
   mapPins.appendChild(fragment);
 };
@@ -108,10 +112,15 @@ mapFilter.classList.add('map__filters--disabled');
 adFormHeader.classList.add('ad-form-header--disabled');
 
 var formElements = document.querySelectorAll('.ad-form__element');
-
 for (var i = 0; i < formElements.length; i++) {
   var item = formElements[i];
   item.disabled = true;
+}
+
+var mapFilters = document.querySelectorAll('.map__filter');
+for (j = 0; j < mapFilters.length; j++) {
+  var item2 = mapFilters[j];
+  item2.disabled = true;
 }
 
 var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
@@ -122,3 +131,4 @@ address.value = leftPos + ', ' + topPos;
 mapPinMain.addEventListener('mouseup', function () {
   activateMap();
 });
+
