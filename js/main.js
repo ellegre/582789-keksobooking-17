@@ -134,20 +134,7 @@ mapPinMain.addEventListener('mouseup', function () {
 
 // Валидация формы
 
-address.readonly = true;
-var title = document.querySelector('#title');
-title.setAttribute('minlength', '30');
-title.setAttribute('maxlength', '100');
-title.required = true;
-
 var price = document.querySelector('#price');
-price.required = true;
-price.max = 1000000;
-
-adForm.action = 'https://js.dump.academy/keksobooking';
-adForm.method = 'POST';
-
-
 var propertySelect = {
   'bungalo': 0,
   'flat': 1000,
@@ -161,15 +148,11 @@ type.addEventListener('change', function () {
   price.placeholder = propertySelect[type.value];
 });
 
-var boundSelects = function () {
-  var checkIn = document.querySelector('#timein');
-  var checkOut = document.querySelector('#timeout');
-  checkIn.addEventListener('change', function () {
-    checkOut.value = checkIn.value;
-  });
-  checkOut.addEventListener('change', function () {
-    checkIn.value = checkOut.value;
-  });
-};
-boundSelects();
-
+var checkIn = document.querySelector('#timein');
+var checkOut = document.querySelector('#timeout');
+checkIn.addEventListener('change', function () {
+  checkOut.value = checkIn.value;
+});
+checkOut.addEventListener('change', function () {
+  checkIn.value = checkOut.value;
+});
