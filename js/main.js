@@ -63,7 +63,7 @@ var propertyList = getPropertyList(ADS_NUMBER);
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
   markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
-  markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
+  markerElement.style.top = marker.location.y + PIN_HEIGHT + TIP_HEIGHT + 'px';
   markerElement.querySelector('img').src = marker.author.avatar;
   markerElement.querySelector('img').alt = 'Заголовок объявления';
   return markerElement;
@@ -129,8 +129,6 @@ var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
 address.value = leftPos + ', ' + topPos;
 
 
-
-
 // Валидация формы
 
 var price = document.querySelector('#price');
@@ -159,7 +157,6 @@ checkOut.addEventListener('change', function () {
 
 // Перемещение маркера
 
-var mapPinMain = document.querySelector('.map__pin--main');
 mapPinMain.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
 
@@ -179,27 +176,28 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     startCoords = {
       x: moveEvt.clientX,
       y: moveEvt.clientY
-    }
+    };
 
-  mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-  mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    address.value = startCoords.x + ', ' + (startCoords.y + TIP_HEIGHT);
 
-  }
+    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
+  };
 
   var onMouseUp = function (upEvt) {
-    upEvt.preventDefault ();
+    upEvt.preventDefault();
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
-  }
+  };
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
-  activateMap();
-});
 
+});
 
 mapPinMain.addEventListener('mouseup', function () {
   activateMap();
+
 });
