@@ -200,8 +200,8 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
     //address.value = startCoords.x + ', ' + (startCoords.y + TIP_HEIGHT);
 
-    // mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-    // mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
   };
 
