@@ -206,11 +206,12 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
+    address.value = calculateCoords(mapPinMain);
   };
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
-  address.value = calculateCoords(mapPinMain);
+
 
 });
 
