@@ -91,6 +91,8 @@ var adFormHeader = document.querySelector('.ad-form-header');
 var address = document.querySelector('#address');
 var mapPinMain = document.querySelector('.map__pin--main');
 
+
+
 var activateMap = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
@@ -104,9 +106,16 @@ var activateMap = function () {
     var item2 = mapFilters[j];
     item2.disabled = false;
   }
-  address.value = leftPos + ', ' + (topPos + OFFSET_HEIGHT / 2 + TIP_HEIGHT);
+
+
+  //address.value = leftPos + ', ' + (topPos + OFFSET_HEIGHT / 2 + TIP_HEIGHT);
+
+  //adress.value = calculateCoords(mapPinMain);
   mapPins.appendChild(fragment);
 };
+
+
+
 
 mapFilter.classList.add('map__filters--disabled');
 adFormHeader.classList.add('ad-form-header--disabled');
@@ -127,6 +136,8 @@ var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
 var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
 
 address.value = leftPos + ', ' + topPos;
+
+
 
 
 // Валидация формы
@@ -157,6 +168,13 @@ checkOut.addEventListener('change', function () {
 
 // Перемещение маркера
 
+var calculateCoords = function (elem) {
+  var topPos = elem.offsetTop + elem.offsetHeight;
+  var leftPos = elem.offsetLeft + elem.offsetWidth / 2;
+  var currentCoords = leftPos + ', ' + topPos;
+  return currentCoords;
+}
+
 mapPinMain.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
 
@@ -178,10 +196,12 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       y: moveEvt.clientY
     };
 
-    address.value = startCoords.x + ', ' + (startCoords.y + TIP_HEIGHT);
+    address.value = calculateCoords(mapPinMain);
 
-    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    //address.value = startCoords.x + ', ' + (startCoords.y + TIP_HEIGHT);
+
+    // mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+    // mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
   };
 
