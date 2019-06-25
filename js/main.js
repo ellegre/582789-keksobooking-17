@@ -168,12 +168,14 @@ checkOut.addEventListener('change', function () {
 
 // Перемещение маркера
 
+
 var calculateCoords = function (elem) {
   var topPos = elem.offsetTop + elem.offsetHeight;
   var leftPos = elem.offsetLeft + elem.offsetWidth / 2;
   var currentCoords = leftPos + ', ' + topPos;
   return currentCoords;
 }
+
 
 mapPinMain.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -195,14 +197,8 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       x: moveEvt.clientX,
       y: moveEvt.clientY
     };
-
-    address.value = calculateCoords(mapPinMain);
-
-    //address.value = startCoords.x + ', ' + (startCoords.y + TIP_HEIGHT);
-
     mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
     mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-
   };
 
   var onMouseUp = function (upEvt) {
@@ -214,6 +210,7 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+  address.value = calculateCoords(mapPinMain);
 
 });
 
@@ -221,3 +218,4 @@ mapPinMain.addEventListener('mouseup', function () {
   activateMap();
 
 });
+
