@@ -10,7 +10,7 @@ var PIN_HEIGHT = 70;
 var PIN_WIDTH = 50;
 var OFFSET_HEIGHT = 65;
 var OFFSET_WIDTH = 65;
-var TIP_HEIGHT = 22;
+var TIP_HEIGHT = 20;
 
 var createRandomNumber = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -104,7 +104,6 @@ var activateMap = function () {
     var item2 = mapFilters[j];
     item2.disabled = false;
   }
-  address.value = leftPos + ', ' + (topPos + OFFSET_HEIGHT / 2 + TIP_HEIGHT);
   mapPins.appendChild(fragment);
 };
 
@@ -127,10 +126,6 @@ var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
 var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
 
 address.value = leftPos + ', ' + topPos;
-
-mapPinMain.addEventListener('mouseup', function () {
-  activateMap();
-});
 
 // Валидация формы
 
@@ -155,4 +150,70 @@ checkIn.addEventListener('change', function () {
 });
 checkOut.addEventListener('change', function () {
   checkIn.value = checkOut.value;
+});
+
+
+// Перемещение маркера
+
+
+var calculateCoords = function (elem) {
+  topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
+  leftPos = elem.offsetLeft + elem.offsetWidth / 2;
+  var currentCoords = leftPos + ', ' + topPos;
+  return currentCoords;
+};
+
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+
+    if (mapPinMain.offsetTop + OFFSET_HEIGHT + TIP_HEIGHT < PIN_Y_MIN) {
+      mapPinMain.style.top = PIN_Y_MIN - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
+    }
+
+    if (mapPinMain.offsetTop + OFFSET_HEIGHT + TIP_HEIGHT > PIN_Y_MAX) {
+      mapPinMain.style.top = PIN_Y_MAX - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
+    }
+
+    if (mapPinMain.offsetLeft < PIN_X_MIN) {
+      mapPinMain.style.left = PIN_X_MIN + 'px';
+    }
+
+    if (mapPinMain.offsetLeft + OFFSET_WIDTH > PIN_X_MAX) {
+      mapPinMain.style.left = PIN_X_MAX - OFFSET_WIDTH + 'px';
+    }
+
+    address.value = calculateCoords(mapPinMain);
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    activateMap();
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
