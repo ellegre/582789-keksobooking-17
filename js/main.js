@@ -157,7 +157,7 @@ checkOut.addEventListener('change', function () {
 
 
 var calculateCoords = function (elem) {
-  topPos = elem.offsetTop + elem.offsetHeight;
+  topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
   leftPos = elem.offsetLeft + elem.offsetWidth / 2;
   var currentCoords = leftPos + ', ' + topPos;
   return currentCoords;
@@ -186,19 +186,19 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     };
 
 
-    if ((mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT) < PIN_Y_MIN) {
+    if (mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT < PIN_Y_MIN) {
       mapPinMain.style.top = PIN_Y_MIN - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
     }
 
-    if ((mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT) > PIN_Y_MAX) {
+    if (mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT > PIN_Y_MAX) {
       mapPinMain.style.top = PIN_Y_MAX - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
     }
 
-    if ((mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH / 2) < PIN_X_MIN) {
-      mapPinMain.style.left = PIN_X_MIN - OFFSET_WIDTH + 'px';
+    if (mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH < PIN_X_MIN) {
+      mapPinMain.style.left = PIN_X_MIN + OFFSET_WIDTH + 'px';
     }
 
-    if ((mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH / 2) > PIN_X_MAX) {
+    if (mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH > PIN_X_MAX) {
       mapPinMain.style.left = PIN_X_MAX - OFFSET_WIDTH + 'px';
     }
 
