@@ -204,13 +204,12 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       mapPinMain.style.left = PIN_X_MAX - OFFSET_WIDTH + 'px';
     }
 
-
     address.value = calculateCoords(mapPinMain);
   };
 
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
-
+    activateMap();
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
@@ -218,8 +217,3 @@ mapPinMain.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
-
-mapPinMain.addEventListener('mouseup', function () {
-  activateMap();
-});
-
