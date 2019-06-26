@@ -185,27 +185,27 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       y: moveEvt.clientY
     };
 
+    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
-    if (mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT < PIN_Y_MIN) {
+    if (mapPinMain.offsetTop + OFFSET_HEIGHT + TIP_HEIGHT < PIN_Y_MIN) {
       mapPinMain.style.top = PIN_Y_MIN - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
     }
 
-    if (mapPinMain.offsetTop - shift.y + OFFSET_HEIGHT + TIP_HEIGHT > PIN_Y_MAX) {
+    if (mapPinMain.offsetTop + OFFSET_HEIGHT + TIP_HEIGHT > PIN_Y_MAX) {
       mapPinMain.style.top = PIN_Y_MAX - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
     }
 
-    if (mapPinMain.offsetLeft - shift.x < PIN_X_MIN) {
+    if (mapPinMain.offsetLeft < PIN_X_MIN) {
       mapPinMain.style.left = PIN_X_MIN + 'px';
     }
 
-    if (mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH > PIN_X_MAX) {
+    if (mapPinMain.offsetLeft + OFFSET_WIDTH > PIN_X_MAX) {
       mapPinMain.style.left = PIN_X_MAX - OFFSET_WIDTH + 'px';
     }
 
-    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-    address.value = calculateCoords(mapPinMain);
 
+    address.value = calculateCoords(mapPinMain);
   };
 
   var onMouseUp = function (upEvt) {
