@@ -63,7 +63,7 @@ var propertyList = getPropertyList(ADS_NUMBER);
 var createMarker = function (marker) {
   var markerElement = markerTemplate.cloneNode(true);
   markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
-  markerElement.style.top = marker.location.y + PIN_HEIGHT + TIP_HEIGHT + 'px';
+   markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
   markerElement.querySelector('img').src = marker.author.avatar;
   markerElement.querySelector('img').alt = 'Заголовок объявления';
   return markerElement;
@@ -194,8 +194,8 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       mapPinMain.style.top = PIN_Y_MAX - OFFSET_HEIGHT - TIP_HEIGHT + 'px';
     }
 
-    if (mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH < PIN_X_MIN) {
-      mapPinMain.style.left = PIN_X_MIN + OFFSET_WIDTH + 'px';
+    if (mapPinMain.offsetLeft - shift.x < PIN_X_MIN) {
+      mapPinMain.style.left = PIN_X_MIN + 'px';
     }
 
     if (mapPinMain.offsetLeft - shift.x + OFFSET_WIDTH > PIN_X_MAX) {
