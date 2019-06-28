@@ -52,15 +52,14 @@
     return markerElement;
   };
 
-  var fragment = document.createDocumentFragment();
   var markerTemplate = document
     .querySelector('#pin')
     .content
     .querySelector('button');
 
-
+  window.fragment = document.createDocumentFragment();
   for (var j = 0; j < propertyList.length; j++) {
-    fragment.appendChild(createMarker(propertyList[j]));
+    window.fragment.appendChild(createMarker(propertyList[j]));
   }
 
 }());

@@ -14,7 +14,6 @@
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
-  var fragment = document.createDocumentFragment();
 
   var activateMap = function () {
     map.classList.remove('map--faded');
@@ -29,7 +28,7 @@
       var item2 = mapFilters[j];
       item2.disabled = false;
     }
-    mapPins.appendChild(fragment);
+    mapPins.appendChild(window.fragment);
   };
 
   mapFilter.classList.add('map__filters--disabled');
