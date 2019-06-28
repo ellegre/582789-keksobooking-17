@@ -28,7 +28,7 @@
       var item2 = mapFilters[j];
       item2.disabled = false;
     }
-    mapPins.appendChild(window.fragment);
+    mapPins.appendChild(window.insert());
   };
 
   mapFilter.classList.add('map__filters--disabled');

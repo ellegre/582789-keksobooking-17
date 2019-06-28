@@ -57,9 +57,12 @@
     .content
     .querySelector('button');
 
-  window.fragment = document.createDocumentFragment();
-  for (var j = 0; j < propertyList.length; j++) {
-    window.fragment.appendChild(createMarker(propertyList[j]));
-  }
+  window.insert = function () {
+    var fragment = document.createDocumentFragment();
+    for (var j = 0; j < propertyList.length; j++) {
+      fragment.appendChild(createMarker(propertyList[j]));
+    }
+    return fragment;
+  };
 
 }());
