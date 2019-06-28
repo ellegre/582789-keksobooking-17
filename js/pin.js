@@ -3,6 +3,8 @@
 (function () {
   var PROPERTY_TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var ADS_NUMBER = 8;
+  var PIN_HEIGHT = 70;
+  var PIN_WIDTH = 50;
 
   var createAvatars = function () {
     var avatars = [];
@@ -26,12 +28,12 @@
           'avatar': avatarsList[i]
         },
         offer: {
-          'type': window.data.getPropertyType(PROPERTY_TYPES)
+          'type': window.utils.getPropertyType(PROPERTY_TYPES)
         },
 
         location: {
-          'x': window.data.createRandomNumber(window.data.PIN_X_MIN, window.data.PIN_X_MAX),
-          'y': window.data.createRandomNumber(window.data.PIN_Y_MIN, window.data.PIN_Y_MAX)
+          'x': window.utils.createRandomNumber(window.data.PIN_X_MIN, window.data.PIN_X_MAX),
+          'y': window.utils.createRandomNumber(window.data.PIN_Y_MIN, window.data.PIN_Y_MAX)
         }
       };
       properties.push(property);
@@ -43,14 +45,14 @@
 
   var createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
-    markerElement.style.left = marker.location.x - window.data.PIN_WIDTH / 2 + 'px';
-    markerElement.style.top = marker.location.y - window.data.PIN_HEIGHT + 'px';
+    markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
+    markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
     markerElement.querySelector('img').src = marker.author.avatar;
     markerElement.querySelector('img').alt = 'Заголовок объявления';
     return markerElement;
   };
 
-
+  var fragment = document.createDocumentFragment();
   var markerTemplate = document
     .querySelector('#pin')
     .content
@@ -58,7 +60,7 @@
 
 
   for (var j = 0; j < propertyList.length; j++) {
-    window.data.fragment.appendChild(createMarker(propertyList[j]));
+    fragment.appendChild(createMarker(propertyList[j]));
   }
 
 }());

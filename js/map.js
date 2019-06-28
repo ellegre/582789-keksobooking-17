@@ -4,6 +4,16 @@
 
   // Активация карты
 
+  var OFFSET_HEIGHT = 65;
+  var OFFSET_WIDTH = 65;
+  var TIP_HEIGHT = 20;
+  var PIN_X_MIN = 0;
+  var PIN_X_MAX = 1200;
+  var PIN_Y_MIN = 130;
+  var PIN_Y_MAX = 630;
+  var PIN_HEIGHT = 70;
+  var PIN_WIDTH = 50;
+
   var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
@@ -11,10 +21,7 @@
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
-
-  var OFFSET_HEIGHT = 65;
-  var OFFSET_WIDTH = 65;
-  var TIP_HEIGHT = 20;
+  var fragment = document.createDocumentFragment();
 
   var activateMap = function () {
     map.classList.remove('map--faded');
@@ -29,7 +36,7 @@
       var item2 = mapFilters[j];
       item2.disabled = false;
     }
-    mapPins.appendChild(window.data.fragment);
+    mapPins.appendChild(fragment);
   };
 
   mapFilter.classList.add('map__filters--disabled');
