@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 
-// Валидация формы
+
 
   var price = document.querySelector('#price');
   var propertySelect = {
