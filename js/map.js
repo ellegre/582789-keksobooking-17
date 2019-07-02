@@ -16,6 +16,7 @@
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
+  var serverData = [];
 
 
   mapFilter.classList.add('map__filters--disabled');
@@ -38,6 +39,7 @@
 
   address.value = leftPos + ', ' + topPos;
 
+
   window.activateMap = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
@@ -53,6 +55,8 @@
     }
 
     var successHandler = function (objects) {
+
+      serverData = objects;
       var fragment = document.createDocumentFragment();
       for (i = 0; i < ADS_NUMBER; i++) {
         fragment.appendChild(window.createMarker(objects[i]));
@@ -62,14 +66,16 @@
 
     var errorHandler = function () {
 
-      var errorElement = errorTemplate.cloneNode(true);
+
       var errorTemplate = document
           .querySelector('#error')
           .content
           .querySelector('div');
-      document.body.insertAdjacentElement('afterbegin', errorTemplate);
+
+      var errorElement = errorTemplate.cloneNode(true);
+      document.body.insertAdjacentElement('afterbegin', errorElement);
     };
-    window.load(successHandler, errorHandler,'GET', URL, data);
+    window.load(successHandler, errorHandler, 'GET', URL);
   };
 
   // Перемещение маркера
@@ -126,7 +132,9 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      window.activateMap();
+      if (serverData.length === 0) {
+        window.activateMap();
+      }
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
