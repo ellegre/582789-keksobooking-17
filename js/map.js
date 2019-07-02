@@ -37,7 +37,38 @@
 
   address.value = leftPos + ', ' + topPos;
 
+  window.activateMap = function () {
+    map.classList.remove('map--faded');
+    adForm.classList.remove('ad-form--disabled');
+    mapFilter.classList.remove('map__filters--disabled');
+    adFormHeader.classList.remove('ad-form-header--disabled');
+    for (var i = 0; i < formElements.length; i++) {
+      var item = formElements[i];
+      item.disabled = false;
+    }
+    for (j = 0; j < mapFilters.length; j++) {
+      var item2 = mapFilters[j];
+      item2.disabled = false;
+    }
 
+    var successHandler = function (objects) {
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < 5; i++) {
+      fragment.appendChild(window.createMarker(objects[j]));
+    }
+    mapPins.appendChild(fragment);
+    };
+
+    var errorHandler = function (errorMessage) {
+      var markerTemplate = document
+        .querySelector('#error')
+        .content
+        .querySelector('div');
+     document.body.insertAdjacentElement('afterbegin', markerTemplate);
+    };
+   window.load(successHandler, errorHandler,'GET', URL, data);
+  };
   // Перемещение маркера
 
 
