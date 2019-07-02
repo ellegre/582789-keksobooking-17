@@ -7,6 +7,7 @@
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
+  var URL = 'https://js.dump.academy/keksobooking/data';
   var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
@@ -15,21 +16,6 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
 
-  var activateMap = function () {
-    map.classList.remove('map--faded');
-    adForm.classList.remove('ad-form--disabled');
-    mapFilter.classList.remove('map__filters--disabled');
-    adFormHeader.classList.remove('ad-form-header--disabled');
-    for (var i = 0; i < formElements.length; i++) {
-      var item = formElements[i];
-      item.disabled = false;
-    }
-    for (j = 0; j < mapFilters.length; j++) {
-      var item2 = mapFilters[j];
-      item2.disabled = false;
-    }
-    mapPins.appendChild(window.insert());
-  };
 
   mapFilter.classList.add('map__filters--disabled');
   adFormHeader.classList.add('ad-form-header--disabled');
@@ -108,7 +94,7 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      activateMap();
+      window.activateMap();
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };

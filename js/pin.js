@@ -58,18 +58,6 @@
     .querySelector('button');
 
 
-    window.insert = function () {
-      window.load(function (objects) {
-      var fragment = document.createDocumentFragment();
-         console.log(objects);
-      for (var j = 0; j < 5; j++) {
-        fragment.appendChild(createMarker(objects[j]));
-      }
-      return fragment;
-
-    });
-  };
-
   var notice = document.querySelector('.notice');
   var form = notice.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
@@ -79,6 +67,48 @@
     evt.preventDefault();
   });
 
+  window.activateMap = function () {
+      map.classList.remove('map--faded');
+      adForm.classList.remove('ad-form--disabled');
+      mapFilter.classList.remove('map__filters--disabled');
+      adFormHeader.classList.remove('ad-form-header--disabled');
+      for (var i = 0; i < formElements.length; i++) {
+        var item = formElements[i];
+        item.disabled = false;
+      }
+      for (j = 0; j < mapFilters.length; j++) {
+        var item2 = mapFilters[j];
+        item2.disabled = false;
+      }
 
+      var successHandler = function (objects) {
+      var fragment = document.createDocumentFragment();
+
+      for (var i = 0; i < 5; i++) {
+        fragment.appendChild(createMarker(objects[j]));
+      }
+      mapPins.appendChild(fragment);
+    };
+
+    };
+
+
+
+
+    /*var errorHandler = function (errorMessage) {
+      var node = document.createElement('div');
+      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      node.style.position = 'absolute';
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = '30px';
+
+      node.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', node);
+    };
+
+  */
+
+    window.load(successHandler, errorHandler,'GET', UPL, data);
 
 }());
