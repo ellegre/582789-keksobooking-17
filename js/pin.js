@@ -1,48 +1,10 @@
 'use strict';
 
 (function () {
-  //var PROPERTY_TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var ADS_NUMBER = 8;
   var PIN_HEIGHT = 70;
   var PIN_WIDTH = 50;
 
-  /*var createAvatars = function () {
-    var avatars = [];
-    for (var i = 1; i < ADS_NUMBER + 1; i++) {
-      if (i < 10) {
-        i = '0' + i;
-      }
-      var avatar = 'img/avatars/user' + i + '.png';
-      avatars.push(avatar);
-    }
-    return avatars;
-  };
-
-  var avatarsList = createAvatars();
-
-  var getPropertyList = function (number) {
-    var properties = [];
-    for (var i = 0; i < number; i++) {
-      var property = {
-        author: {
-          'avatar': avatarsList[i]
-        },
-        offer: {
-          'type': window.utils.getPropertyType(PROPERTY_TYPES)
-        },
-
-        location: {
-          'x': window.utils.createRandomNumber(window.data.PIN_X_MIN, window.data.PIN_X_MAX),
-          'y': window.utils.createRandomNumber(window.data.PIN_Y_MIN, window.data.PIN_Y_MAX)
-        }
-      };
-      properties.push(property);
-    }
-    return properties;
-  };
-
-  var propertyList = getPropertyList(ADS_NUMBER);
-*/
   var createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
     markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
@@ -88,26 +50,16 @@
         fragment.appendChild(createMarker(objects[j]));
       }
       mapPins.appendChild(fragment);
+      };
+
+      var errorHandler = function (errorMessage) {
+        var markerTemplate = document
+          .querySelector('#error')
+          .content
+          .querySelector('div');
+       document.body.insertAdjacentElement('afterbegin', markerTemplate);
+     };
     };
-
-    };
-
-
-
-
-    /*var errorHandler = function (errorMessage) {
-      var node = document.createElement('div');
-      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-      node.style.position = 'absolute';
-      node.style.left = 0;
-      node.style.right = 0;
-      node.style.fontSize = '30px';
-
-      node.textContent = errorMessage;
-      document.body.insertAdjacentElement('afterbegin', node);
-    };
-
-  */
 
     window.load(successHandler, errorHandler,'GET', UPL, data);
 
