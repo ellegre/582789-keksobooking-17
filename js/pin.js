@@ -1,10 +1,9 @@
 'use strict';
 
 (function () {
-  var ADS_NUMBER = 8;
+
   var PIN_HEIGHT = 70;
   var PIN_WIDTH = 50;
-
 
   window.createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
@@ -24,18 +23,10 @@
   var notice = document.querySelector('.notice');
   var form = notice.querySelector('.ad-form');
 
-  var mapFilter = document.querySelector('.map__filters');
-  var adForm = document.querySelector('.ad-form');
-  var adFormHeader = document.querySelector('.ad-form-header');
-
   form.addEventListener('submit', function (evt) {
-    window.upload(new FormData(form), function (response) {
+    window.load(new FormData(form), function (response) {
       notice.classList.add('hidden');
     });
     evt.preventDefault();
   });
-
-
-
-
 }());

@@ -7,6 +7,7 @@
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
+  var ADS_NUMBER = 5;
   var URL = 'https://js.dump.academy/keksobooking/data';
   var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
@@ -42,35 +43,36 @@
     adForm.classList.remove('ad-form--disabled');
     mapFilter.classList.remove('map__filters--disabled');
     adFormHeader.classList.remove('ad-form-header--disabled');
-    for (var i = 0; i < formElements.length; i++) {
-      var item = formElements[i];
+    for (i = 0; i < formElements.length; i++) {
+      item = formElements[i];
       item.disabled = false;
     }
     for (j = 0; j < mapFilters.length; j++) {
-      var item2 = mapFilters[j];
+      item2 = mapFilters[j];
       item2.disabled = false;
     }
 
     var successHandler = function (objects) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < 5; i++) {
-      fragment.appendChild(window.createMarker(objects[j]));
-    }
-    mapPins.appendChild(fragment);
+      var fragment = document.createDocumentFragment();
+      for (i = 0; i < ADS_NUMBER; i++) {
+        fragment.appendChild(window.createMarker(objects[i]));
+      }
+      mapPins.appendChild(fragment);
     };
 
-    var errorHandler = function (errorMessage) {
-      var markerTemplate = document
-        .querySelector('#error')
-        .content
-        .querySelector('div');
-     document.body.insertAdjacentElement('afterbegin', markerTemplate);
+    var errorHandler = function () {
+
+      var errorElement = errorTemplate.cloneNode(true);
+      var errorTemplate = document
+          .querySelector('#error')
+          .content
+          .querySelector('div');
+      document.body.insertAdjacentElement('afterbegin', errorTemplate);
     };
-   window.load(successHandler, errorHandler,'GET', URL, data);
+    window.load(successHandler, errorHandler,'GET', URL, data);
   };
-  // Перемещение маркера
 
+  // Перемещение маркера
 
   var calculateCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
@@ -78,7 +80,6 @@
     var currentCoords = leftPos + ', ' + topPos;
     return currentCoords;
   };
-
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();

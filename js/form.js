@@ -1,8 +1,6 @@
 'use strict';
 (function () {
 
-
-
   var price = document.querySelector('#price');
   var propertySelect = {
     'bungalo': 0,
