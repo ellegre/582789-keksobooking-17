@@ -4,8 +4,11 @@
 
   var PIN_HEIGHT = 70;
   var PIN_WIDTH = 50;
+  var ADS_NUMBER = 5;
 
-  window.createMarker = function (marker) {
+  mapPins = document.querySelector('.map__pins');
+
+  var createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
     markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
     markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
@@ -18,6 +21,19 @@
     .querySelector('#pin')
     .content
     .querySelector('button');
+
+  window.createUpdatedArray = function (arr) {
+
+
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < ADS_NUMBER; i++) {
+        fragment.appendChild(window.createMarker(arr[i]));
+      }
+      mapPins.appendChild(fragment);
+
+ }
+
+
 
 
   var notice = document.querySelector('.notice');
