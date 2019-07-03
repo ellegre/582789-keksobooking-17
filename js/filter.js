@@ -10,7 +10,10 @@
       var housingTypes = window.dataArray.filter(function(it) {
         return it.offer.type === housingType.value;
       });
-     window.createUpdatedArray(housingTypes);
+      console.log(housingTypes);
+      console.log(housingType.value);
+     window.createUpdatedArray(housingTypes)();
+
   })
 }
 
