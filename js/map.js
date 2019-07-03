@@ -59,6 +59,7 @@
 
       serverData = objects;
       window.dataArray = serverData;
+      window.updateHousingType();
       var fragment = document.createDocumentFragment();
       for (i = 0; i < ADS_NUMBER; i++) {
         fragment.appendChild(window.createMarker(objects[i]));
