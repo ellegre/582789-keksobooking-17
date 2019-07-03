@@ -2,7 +2,7 @@
 (function () {
 
   var price = document.querySelector('#price');
-  var propertySelect = {
+  window.propertySelect = {
     'bungalo': 0,
     'flat': 1000,
     'house': 5000,
@@ -11,8 +11,8 @@
 
   var type = document.querySelector('#type');
   type.addEventListener('change', function () {
-    price.min = propertySelect[type.value];
-    price.placeholder = propertySelect[type.value];
+    price.min = window.propertySelect[type.value];
+    price.placeholder = window.propertySelect[type.value];
   });
 
   var checkIn = document.querySelector('#timein');

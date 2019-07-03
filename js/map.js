@@ -19,6 +19,7 @@
   var serverData = [];
 
 
+
   mapFilter.classList.add('map__filters--disabled');
   adFormHeader.classList.add('ad-form-header--disabled');
 
@@ -57,6 +58,7 @@
     var successHandler = function (objects) {
 
       serverData = objects;
+      window.dataArray = serverData;
       var fragment = document.createDocumentFragment();
       for (i = 0; i < ADS_NUMBER; i++) {
         fragment.appendChild(window.createMarker(objects[i]));

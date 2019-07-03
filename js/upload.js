@@ -1,13 +1,15 @@
 'use strict';
 
 (function () {
+  var SUCCESS_LOAD = 200;
+  var TIMEOUT = 10000;
 
   window.load = function (onSuccess, onError, method, url, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === SUCCESS_LOAD) {
         onSuccess(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -20,7 +22,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = TIMEOUT; // 10s
 
     xhr.open(method, url);
     xhr.send(data);
