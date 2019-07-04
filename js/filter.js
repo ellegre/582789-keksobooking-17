@@ -8,12 +8,12 @@
 
     if (housingType.value !== 'any') {
       var pins = document.querySelectorAll('.map__pin');
-      for (var i = 0; i < pins.length; i++) {
-        pins[i].remove();
-        var housingTypes = window.dataArray.filter(function (it) {
-          return it.offer.type === housingType.value;
-        });
-      }
+      pins = Array.from(pins);
+      var pinsWithoutMain = pins.slice(1);
+      window.utils.clearElemArr(pinsWithoutMain);
+      var housingTypes = window.dataArray.filter(function (it) {
+        return it.offer.type === housingType.value;
+      });
     }
     window.createUpdatedArray(housingTypes);
   });

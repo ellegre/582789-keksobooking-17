@@ -13,6 +13,16 @@
     getPropertyType: function (arr) {
       var arrRandNumber = Math.floor(Math.random() * arr.length);
       return arr[arrRandNumber];
+    },
+
+    clearElemArr: function (arr) {
+
+      for (var i = 0; i < arr.length; i++) {
+        if (arr.length !== 0) {
+          arr[i].remove();
+        }
+      }
     }
   };
+
 }());
