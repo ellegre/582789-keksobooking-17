@@ -12,6 +12,7 @@
         return it.offer.type === housingType.value;
         });
       }
+      window.createUpdatedArray(housingTypes)();
     })
   }
 }());

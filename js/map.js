@@ -17,7 +17,7 @@
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
-  var serverData = [];
+  var dataArray = [];
 
 
 
@@ -58,14 +58,9 @@
 
     var successHandler = function (objects) {
 
-      serverData = objects;
-      window.dataArray = serverData;
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < ADS_NUMBER; i++) {
-        fragment.appendChild(window.createMarker(window.dataArray[i]));
-      }
-      mapPins.appendChild(fragment);
-      window.updateHousingType();
+      window.dataArray = objects;
+      window.createUpdatedArray(window.dataArray);
+      window.updateHousingType(window.dataArray);
     };
 
     var errorHandler = function () {
@@ -136,7 +131,7 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      if (serverData.length === 0) {
+      if (window.dataArray.length === 0) {
         window.activateMap();
       }
       document.removeEventListener('mousemove', onMouseMove);
