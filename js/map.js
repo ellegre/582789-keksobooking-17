@@ -58,8 +58,6 @@
 
       window.dataArray = objects;
       window.createUpdatedArray(window.dataArray);
-
-      window.updateHousingType();
     };
 
     var errorHandler = function () {
