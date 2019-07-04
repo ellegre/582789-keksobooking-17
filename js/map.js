@@ -7,6 +7,7 @@
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
+  var ADS_NUMBER = 5;
 
   var URL = 'https://js.dump.academy/keksobooking/data';
   var map = document.querySelector('.map');
@@ -15,7 +16,7 @@
   var adFormHeader = document.querySelector('.ad-form-header');
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
-  window.mapPins = document.querySelector('.map__pins');
+  var mapPins = document.querySelector('.map__pins');
   var serverData = [];
 
 
@@ -59,6 +60,11 @@
 
       serverData = objects;
       window.dataArray = serverData;
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < ADS_NUMBER; i++) {
+        fragment.appendChild(window.createMarker(window.dataArray[i]));
+      }
+      mapPins.appendChild(fragment);
       window.updateHousingType();
     };
 

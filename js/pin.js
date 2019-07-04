@@ -8,7 +8,7 @@
 
   var mapPins = document.querySelector('.map__pins');
 
-  var createMarker = function (marker) {
+  window.createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
     markerElement.style.left = marker.location.x - PIN_WIDTH / 2 + 'px';
     markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
@@ -22,13 +22,6 @@
     .content
     .querySelector('button');
 
-  window.createUpdatedArray = function (arr) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < ADS_NUMBER; i++) {
-      fragment.appendChild(createMarker(arr[i]));
-    }
-    mapPins.appendChild(fragment);
- }
 
   var notice = document.querySelector('.notice');
   var form = notice.querySelector('.ad-form');
