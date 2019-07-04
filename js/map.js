@@ -17,9 +17,7 @@
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
-  var dataArray = [];
-
-
+  window.dataArray = [];
 
   mapFilter.classList.add('map__filters--disabled');
   adFormHeader.classList.add('ad-form-header--disabled');
@@ -60,7 +58,8 @@
 
       window.dataArray = objects;
       window.createUpdatedArray(window.dataArray);
-      window.updateHousingType(window.dataArray);
+
+      window.updateHousingType();
     };
 
     var errorHandler = function () {
