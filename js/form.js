@@ -2,13 +2,16 @@
 (function () {
 
   var price = document.querySelector('#price');
-  var propertySelect = {
+  /*
+
+var propertySelect = {
     'bungalo': 0,
     'flat': 1000,
     'house': 5000,
     'palace': 10000
   };
 
+*/
   var type = document.querySelector('#type');
   type.addEventListener('change', function () {
     price.min = window.propertySelect[type.value];

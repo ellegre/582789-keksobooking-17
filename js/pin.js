@@ -24,7 +24,7 @@
 
   window.createUpdatedArray = function (arr) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < ADS_NUMBER; i++) {
+    for (var i = 0; i < ADS_NUMBER && i < arr.length; i++) {
       fragment.appendChild(createMarker(arr[i]));
     }
     mapPins.appendChild(fragment);
