@@ -2,6 +2,7 @@
 (function () {
 
   var price = document.querySelector('#price');
+
   var propertySelect = {
     'bungalo': 0,
     'flat': 1000,
