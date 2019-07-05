@@ -7,10 +7,8 @@
   housingType.addEventListener('change', function () {
 
     if (housingType.value !== 'any') {
-      var pins = document.querySelectorAll('.map__pin');
-      pins = Array.from(pins);
-      var pinsWithoutMain = pins.slice(1);
-      window.utils.clearElemArr(pinsWithoutMain);
+
+      window.utils.clearPins();
       var housingTypes = window.dataArray.filter(function (it) {
         return it.offer.type === housingType.value;
       });

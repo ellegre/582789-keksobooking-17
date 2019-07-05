@@ -15,11 +15,12 @@
       return arr[arrRandNumber];
     },
 
-    clearElemArr: function (arr) {
-
-      for (var i = 0; i < arr.length; i++) {
-        if (arr.length !== 0) {
-          arr[i].remove();
+    clearPins: function () {
+      var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+      pins = Array.from(pins);
+      if (pins.length !== 0) {
+        for (var i = 0; i < pins.length; i++) {
+          pins[i].remove();
         }
       }
     }
