@@ -39,7 +39,7 @@
 
 
   window.activateMap = function () {
-    map.classList.remove('map--faded');
+    window.map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     mapFilter.classList.remove('map__filters--disabled');
     adFormHeader.classList.remove('ad-form-header--disabled');
