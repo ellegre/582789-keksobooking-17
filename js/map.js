@@ -9,7 +9,7 @@
   var TIP_HEIGHT = 20;
 
   var URL = 'https://js.dump.academy/keksobooking/data';
-  var map = document.querySelector('.map');
+  window.map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
   var adFormHeader = document.querySelector('.ad-form-header');
@@ -56,6 +56,7 @@
 
       window.dataArray = objects;
       window.createUpdatedArray(window.dataArray);
+      window.createCardArray(window.dataArray);
     };
 
     var errorHandler = function () {

@@ -6,7 +6,7 @@
   var PIN_WIDTH = 50;
   var ADS_NUMBER = 5;
 
-  var mapPins = document.querySelector('.map__pins');
+  window.mapPins = document.querySelector('.map__pins');
 
   var createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
@@ -27,7 +27,7 @@
     for (var i = 0; i < ADS_NUMBER && i < arr.length; i++) {
       fragment.appendChild(createMarker(arr[i]));
     }
-    mapPins.appendChild(fragment);
+    window.mapPins.appendChild(fragment);
   };
 
 
