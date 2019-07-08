@@ -31,13 +31,10 @@
   };
 
 
-  var notice = document.querySelector('.notice');
-  var form = notice.querySelector('.ad-form');
 
-  form.addEventListener('submit', function (evt) {
-    window.load(new FormData(form), function () {
-      notice.classList.add('hidden');
-    });
-    evt.preventDefault();
-  });
+
+
+
+
+
 }());

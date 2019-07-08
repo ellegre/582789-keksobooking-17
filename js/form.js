@@ -24,4 +24,21 @@
   checkOut.addEventListener('change', function () {
     checkIn.value = checkOut.value;
   });
+
+
+
+  var notice = document.querySelector('.notice');
+  var form = notice.querySelector('.ad-form');
+
+  form.addEventListener('submit', function (evt) {
+    window.load(new FormData(form), function () {
+      notice.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
+
+ //window.load = function (onSuccess, onError, method, url, data)
+
+//https://js.dump.academy/keksobooking.
+
 }());
