@@ -23,6 +23,21 @@
           pins[i].remove();
         }
       }
+    },
+    openPopup: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+    isEscEvent: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+    isEnterEvent: function (evt, action, data) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        action(data);
+      }
     }
   };
 

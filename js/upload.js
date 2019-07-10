@@ -4,7 +4,7 @@
   var SUCCESS_LOAD = 200;
   var TIMEOUT = 10000;
 
-  window.load = function (onSuccess, onError, method, url, data) {
+  var load = function (onSuccess, onError, method, url, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -27,4 +27,8 @@
     xhr.open(method, url);
     xhr.send(data);
   };
+
+  window.upload = {
+    load: load
+  }
 })();
