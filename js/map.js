@@ -9,13 +9,13 @@
   var TIP_HEIGHT = 20;
 
   var URL = 'https://js.dump.academy/keksobooking/data';
-  window.map = document.querySelector('.map');
+  var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
   var adFormHeader = document.querySelector('.ad-form-header');
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
-  window.dataArray = [];
+  var dataArray = [];
 
   mapFilter.classList.add('map__filters--disabled');
   adFormHeader.classList.add('ad-form-header--disabled');
@@ -38,7 +38,7 @@
   address.value = leftPos + ', ' + topPos;
 
 
-  window.activateMap = function () {
+  var activateMap = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     mapFilter.classList.remove('map__filters--disabled');
@@ -54,9 +54,8 @@
 
     var successHandler = function (objects) {
 
-      window.dataArray = objects;
-      window.createUpdatedArray(window.dataArray);
-      window.createCardArray(window.dataArray);
+      dataArray = objects;
+      window.pin.createUpdatedArray(dataArray);
     };
 
     var errorHandler = function () {
@@ -70,7 +69,7 @@
       var errorElement = errorTemplate.cloneNode(true);
       document.body.insertAdjacentElement('afterbegin', errorElement);
     };
-    window.load(successHandler, errorHandler, 'GET', URL);
+    window.upload.load(successHandler, errorHandler, 'GET', URL);
   };
 
   // Перемещение маркера
@@ -127,8 +126,8 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      if (window.dataArray.length === 0) {
-        window.activateMap();
+      if (dataArray.length === 0) {
+        activateMap();
       }
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
@@ -137,5 +136,11 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.map = {
+    map: map,
+    dataArray: dataArray,
+    activateMap: activateMap
+  };
 
 }());

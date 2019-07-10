@@ -6,7 +6,7 @@
   var PIN_WIDTH = 50;
   var ADS_NUMBER = 5;
 
-  window.mapPins = document.querySelector('.map__pins');
+  var mapPins = document.querySelector('.map__pins');
 
   var createMarker = function (marker) {
     var markerElement = markerTemplate.cloneNode(true);
@@ -14,6 +14,15 @@
     markerElement.style.top = marker.location.y - PIN_HEIGHT + 'px';
     markerElement.querySelector('img').src = marker.author.avatar;
     markerElement.querySelector('img').alt = 'Заголовок объявления';
+
+    markerElement.addEventListener('click', function () {
+      window.card.openCard(marker);
+    });
+
+    markerElement.addEventListener('keydown', function (evt) {
+      window.utils.isEnterEvent(evt, window.card.openCard, marker);
+    });
+
     return markerElement;
   };
 
@@ -22,22 +31,17 @@
     .content
     .querySelector('button');
 
-  window.createUpdatedArray = function (arr) {
+  var createUpdatedArray = function (arr) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < ADS_NUMBER && i < arr.length; i++) {
       fragment.appendChild(createMarker(arr[i]));
     }
-    window.mapPins.appendChild(fragment);
+    mapPins.appendChild(fragment);
   };
 
+  window.pin = {
+    mapPins: mapPins,
+    createUpdatedArray: createUpdatedArray
+  };
 
-  var notice = document.querySelector('.notice');
-  var form = notice.querySelector('.ad-form');
-
-  form.addEventListener('submit', function (evt) {
-    window.load(new FormData(form), function () {
-      notice.classList.add('hidden');
-    });
-    evt.preventDefault();
-  });
 }());

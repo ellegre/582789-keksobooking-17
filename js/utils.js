@@ -2,6 +2,9 @@
 
 (function () {
 
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
   window.utils = {
 
     createRandomNumber: function (min, max) {
@@ -22,6 +25,21 @@
         for (var i = 0; i < pins.length; i++) {
           pins[i].remove();
         }
+      }
+    },
+    openPopup: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+    isEscEvent: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+    isEnterEvent: function (evt, action, data) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        action(data);
       }
     }
   };
