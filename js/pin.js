@@ -42,6 +42,6 @@
   window.pin = {
     mapPins: mapPins,
     createUpdatedArray: createUpdatedArray
-  }
+  };
 
 }());

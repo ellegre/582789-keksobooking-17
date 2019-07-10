@@ -25,8 +25,6 @@
     checkIn.value = checkOut.value;
   });
 
-
-
   var notice = document.querySelector('.notice');
   var form = notice.querySelector('.ad-form');
 
@@ -37,8 +35,7 @@
     evt.preventDefault();
   });
 
- //window.load = function (onSuccess, onError, method, url, data)
 
-//https://js.dump.academy/keksobooking.
+// https://js.dump.academy/keksobooking.
 
 }());

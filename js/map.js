@@ -137,11 +137,10 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-window.map = {
-  map: map,
-  dataArray: dataArray,
-  activateMap: activateMap
-};
-
+  window.map = {
+    map: map,
+    dataArray: dataArray,
+    activateMap: activateMap
+  };
 
 }());

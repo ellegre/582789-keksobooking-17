@@ -12,9 +12,9 @@
   };
 
   var createFeaturesList = function (featuresList) {
-    var list = card.querySelector('.popup__features');
+    var list = document.querySelector('.popup__features');
     list.innerHTML = '';
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < featuresList.length; i++) {
       var listItem = document.createElement('li');
       listItem.classList.add('feature', 'feature--' + featuresList[i]);
       list.appendChild(listItem);
@@ -22,14 +22,14 @@
   };
 
   var createPhotosList = function (photosList) {
-    var list = card.querySelector('.popup__photos');
+    var list = document.querySelector('.popup__photos');
     list.innerHTML = '';
-    for (var i = 0; i < photos.length; i++) {
+    for (var i = 0; i < photosList.length; i++) {
       var listItem = document.createElement('img');
       listItem.classList.add('.popup__photo');
       listItem.width = CARD_PHOTO_WIDTH;
       listItem.height = CARD_PHOTO_HEIGHT;
-      listItem.src = arr[i];
+      listItem.src = photosList[i];
       listItem.alt = 'Фотография жилья';
       list.appendChild(listItem);
     }
@@ -62,7 +62,7 @@
   };
 
 
-var cardCloseButton = document.querySelector('.popup__close');
+  // var cardCloseButton = document.querySelector('.popup__close');
   var openCard = function (card) {
     var mapCard = window.map.map.querySelector('.map__card');
     if (mapCard) {
@@ -71,17 +71,16 @@ var cardCloseButton = document.querySelector('.popup__close');
     var fragment = document.createDocumentFragment();
     fragment.appendChild(createCard(card));
     window.map.map.insertBefore(fragment, window.map.map.children[1]);
-  }
+  };
 
 
-
-//Обработка нажатия Esc
+  // Обработка нажатия Esc
 
   var CardEscPressHandler = function (evt) {
     window.utils.isEscEvent(evt, closeCard);
   };
 
-// Удаление карточки
+  // Удаление карточки
 
   var closeCard = function () {
     var cardPopup = document.querySelector('.map__card.popup');

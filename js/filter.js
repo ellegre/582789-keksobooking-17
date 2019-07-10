@@ -2,14 +2,14 @@
 
 (function () {
 
-  var housingType = document.querySelector('#housing-type');
+  /*  var housingType = document.querySelector('#housing-type');
   var housingPrice = document.querySelector('#housing-price');
   var housingRoom = document.querySelector('#housing-rooms');
   var housingGuest = document.querySelector('#housing-guests');
   var housingFeatures = document.querySelector('#housing-features');
 
 
-  housingType.addEventListener('change', function () {
+ housingType.addEventListener('change', function () {
 
     if (housingType.value === 'any') {
       window.utils.clearPins();
@@ -72,6 +72,6 @@
     });
 };
 
-
+*/
 
 }());

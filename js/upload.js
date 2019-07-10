@@ -30,5 +30,6 @@
 
   window.upload = {
     load: load
-  }
+  };
+
 })();
