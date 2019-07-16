@@ -2,8 +2,6 @@
 
 (function () {
 
-  // Активация карты
-
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
@@ -21,16 +19,18 @@
   adFormHeader.classList.add('ad-form-header--disabled');
 
   var formElements = document.querySelectorAll('.ad-form__element');
-  for (var i = 0; i < formElements.length; i++) {
-    var item = formElements[i];
+
+  formElements.forEach(function (formElement){
+    var item = formElement;
     item.disabled = true;
-  }
+  })
 
   var mapFilters = document.querySelectorAll('.map__filter');
-  for (var j = 0; j < mapFilters.length; j++) {
-    var item2 = mapFilters[j];
+  mapFilters.forEach(function(mapFilter) {
+    var item2 = mapFilter;
     item2.disabled = true;
-  }
+  })
+
 
   var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
   var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
@@ -43,24 +43,19 @@
     adForm.classList.remove('ad-form--disabled');
     mapFilter.classList.remove('map__filters--disabled');
     adFormHeader.classList.remove('ad-form-header--disabled');
-    for (i = 0; i < formElements.length; i++) {
-      item = formElements[i];
-      item.disabled = false;
-    }
-    for (j = 0; j < mapFilters.length; j++) {
-      item2 = mapFilters[j];
-      item2.disabled = false;
-    }
+    formElements.forEach(function (formElement) {
+      formElement.disabled = false;
+    });
+    mapFilters.forEach(function (mapFilter) {
+      mapFilter.disabled = false;
+    })
 
     var successHandler = function (objects) {
-
       dataArray = objects;
       window.pin.createUpdatedArray(dataArray);
     };
 
     var errorHandler = function () {
-
-
       var errorTemplate = document
           .querySelector('#error')
           .content
@@ -72,7 +67,19 @@
     window.upload.load(successHandler, errorHandler, 'GET', URL);
   };
 
-  // Перемещение маркера
+  var inactivateMap = function () {
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+    mapFilter.classList.add('map__filters--disabled');
+    adFormHeader.classList.add('ad-form-header--disabled');
+    formElements.forEach(function (formElement) {
+      formElement.disabled = true;
+    });
+    mapFilters.forEach(function (mapFilter) {
+      mapFilter.disabled = true;
+    })
+  }
+
 
   var calculateCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
@@ -140,7 +147,11 @@
   window.map = {
     map: map,
     dataArray: dataArray,
-    activateMap: activateMap
+    activateMap: activateMap,
+    adForm: adForm,
+    mapPinMain: mapPinMain,
+    mapFilter: mapFilter,
+    inactivateMap: inactivateMap
   };
 
 }());

@@ -17,10 +17,15 @@
 
     markerElement.addEventListener('click', function () {
       window.card.openCard(marker);
+      markerElement.classList.add('.map__pin--active');
+
     });
 
     markerElement.addEventListener('keydown', function (evt) {
-      window.utils.isEnterEvent(evt, window.card.openCard, marker);
+      if (evt.keyCode === window.data.ENTER_KEYCODE) {
+        window.card.openCard();
+        markerElement.classList.add('.map__pin--active');
+      }
     });
 
     return markerElement;
