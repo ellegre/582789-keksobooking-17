@@ -1,19 +1,63 @@
 'use strict';
 (function () {
 
-  var price = document.querySelector('#price');
+  var URL_TO_SEND = 'https://js.dump.academy/keksobooking';
+  var adForm = document.querySelector('.ad-form'); // window.map.adForm
+  var pinMain = document.querySelector('.map__pin--main');// window.map.mapPinMain
 
-  var propertySelect = {
-    'bungalo': 0,
-    'flat': 1000,
-    'house': 5000,
-    'palace': 10000
+  var price = adForm.querySelector('#price');
+  var type = adForm.querySelector('#type');
+
+  var price = adForm.querySelector('#price');
+  var timeIn = adForm.querySelector('#timein');
+  var timeOut = adForm.querySelector('#timeout');
+
+  var roomNumber = adForm.querySelector('#room_number');
+  var capacity = adForm.querySelector('#capacity');
+
+  var capacityOptions = capacity.querySelectorAll('option');
+
+  var fieldsets = document.querySelectorAll('fieldset'); // window.map.formElements
+  var filters = document.querySelector('.map__filters'); // window.map.mapFilter
+  var selectsFilter = filters.querySelectorAll('select');
+
+
+  // Sending the form
+
+  adForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.upload.load(onLoad, onError, 'POST', URL_TO_SEND, new FormData(adForm));
+  });
+
+ // Validation of my advertisement
+
+  var roomCapacity = {
+    '1': ['1'],
+    '2': ['1', '2'],
+    '3': ['1', '2', '3'],
+    '100': ['0']
   };
 
-  var type = document.querySelector('#type');
+  var changeCapacity = function () {
+    capacityOptions.forEach(function (option) {
+      option.disabled = true;
+      option.selected = false;
+
+      if (roomCapacity[roomNumber.value].indexOf(option.value) > -1) {
+        option.disabled = false;
+        option.selected = true;
+      }
+    });
+  };
+
+  changeCapacity();
+  roomNumber.addEventListener('change', function () {
+    changeCapacity();
+  });
+
   type.addEventListener('change', function () {
-    price.min = propertySelect[type.value];
-    price.placeholder = propertySelect[type.value];
+    price.min = window.data.AccomodationType[type.value].price;
+    price.placeholder = window.data.AccomodationType[type.value].price;
   });
 
   var checkIn = document.querySelector('#timein');
@@ -25,17 +69,77 @@
     checkIn.value = checkOut.value;
   });
 
-  var notice = document.querySelector('.notice');
-  var form = notice.querySelector('.ad-form');
 
-  form.addEventListener('submit', function (evt) {
-    window.load(new FormData(form), function () {
-      notice.classList.add('hidden');
+  // Successfull form sending
+
+  var onLoad = function () {
+    var successTemplate = document.querySelector('#success').content.querySelector('.success');
+
+    var success = successTemplate.cloneNode(true);
+    var fragment = document.createDocumentFragment();
+    var main = document.querySelector('main');
+    fragment.appendChild(success);
+    main.appendChild(fragment);
+
+    var successMessage = main.querySelector('.success');
+    successMessage.addEventListener('click', function () {
+      successMessage.remove();
     });
-    evt.preventDefault();
-  });
+
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.data.ESC_KEYCODE) {
+        successMessage.remove();
+      }
+    });
+
+    resetForm();
+  };
+
+ // Function for inactivate forms
+
+  var resetForm = function () {
+    window.map.inactivateMap();
+    window.utils.clearPins();
+    window.card.closeCard();
+
+  }
 
 
-// https://js.dump.academy/keksobooking.
+  // Unsuccessful form sending
+
+  var onError = function () {
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+    var error = errorTemplate.cloneNode(true);
+    var fragment = document.createDocumentFragment();
+    var main = document.querySelector('main');
+    fragment.appendChild(error);
+    main.appendChild(fragment);
+
+    // Press on button 'Попробовать снова'
+
+    var errorButton = document.querySelector('.error__button');
+    var errorMessage = document.querySelector('.error');
+
+    var onClickError = function () {
+      errorMessage.remove();
+      resetForm();
+    };
+
+    errorButton.addEventListener('click', function () {
+      onClickError();
+    });
+
+    errorMessage.addEventListener('click', function () {
+      onClickError();
+    });
+
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.data.ESC_KEYCODE) {
+        onClickError();
+        document.removeEventListener('keydown', onClickError);
+      }
+    });
+  };
 
 }());
