@@ -10,19 +10,19 @@
     ESC_KEYCODE: 27,
     ENTER_KEYCODE: 13,
     AccomodationType: {
-      'bungalo': {
+      'BUNGALO': {
         price: 0,
         name: 'Бунгало'
-        },
-      'flat': {
+      },
+      'FLAT': {
         price: 1000,
         name: 'Квартира'
       },
-      'house': {
+      'HOUSE': {
         price: 5000,
         name: 'Дом'
       },
-      'palace': {
+      'PALACE': {
         price: 10000,
         name: 'Дворец'
       }
