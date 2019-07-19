@@ -3,24 +3,12 @@
 
   var URL_TO_SEND = 'https://js.dump.academy/keksobooking';
   var adForm = document.querySelector('.ad-form'); // window.map.adForm
-  var pinMain = document.querySelector('.map__pin--main');// window.map.mapPinMain
-
   var price = adForm.querySelector('#price');
   var type = adForm.querySelector('#type');
-
-  var price = adForm.querySelector('#price');
-  var timeIn = adForm.querySelector('#timein');
-  var timeOut = adForm.querySelector('#timeout');
-
   var roomNumber = adForm.querySelector('#room_number');
   var capacity = adForm.querySelector('#capacity');
-
   var capacityOptions = capacity.querySelectorAll('option');
-
-  var fieldsets = document.querySelectorAll('fieldset'); // window.map.formElements
-  var filters = document.querySelector('.map__filters'); // window.map.mapFilter
-  var selectsFilter = filters.querySelectorAll('select');
-
+  var adFormReset = adForm.querySelector('.ad-form__reset');
 
   // Sending the form
 
@@ -29,7 +17,7 @@
     window.upload.load(onLoad, onError, 'POST', URL_TO_SEND, new FormData(adForm));
   });
 
- // Validation of my advertisement
+  // Validation of my advertisement
 
   var roomCapacity = {
     '1': ['1'],
@@ -56,8 +44,8 @@
   });
 
   type.addEventListener('change', function () {
-    price.min = window.data.AccomodationType[type.value].price;
-    price.placeholder = window.data.AccomodationType[type.value].price;
+    price.min = window.data.AccomodationType[type.value.toUpperCase()].price;
+    price.placeholder = window.data.AccomodationType[type.value.toUpperCase()].price;
   });
 
   var checkIn = document.querySelector('#timein');
@@ -84,26 +72,43 @@
     var successMessage = main.querySelector('.success');
     successMessage.addEventListener('click', function () {
       successMessage.remove();
+      adForm.reset();
+      window.page.movePinToInitial();
     });
 
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.data.ESC_KEYCODE) {
         successMessage.remove();
+        adForm.reset();
+        window.page.movePinToInitial();
       }
     });
-
     resetForm();
   };
 
- // Function for inactivate forms
+  // Function for inactivate forms
 
   var resetForm = function () {
-    window.map.inactivateMap();
+    window.page.inactivateMap();
     window.utils.clearPins();
-    window.card.closeCard();
+    window.card.close();
+    adForm.reset();
+    window.page.movePinToInitial();
+  };
 
-  }
+  adForm.addEventListener('reset', function (e) {
+    e.preventDefault();
+    adForm.reset();
+    window.page.movePinToInitial();
+  });
 
+  adFormReset.addEventListener('click', function () {
+    resetForm();
+  });
+
+
+  resetButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
 
   // Unsuccessful form sending
 

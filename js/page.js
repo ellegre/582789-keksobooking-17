@@ -5,7 +5,6 @@
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
-
   var URL = 'https://js.dump.academy/keksobooking/data';
   var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
@@ -13,6 +12,8 @@
   var adFormHeader = document.querySelector('.ad-form-header');
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
+  var mapPinMainX = mapPinMain.offsetLeft;
+  var mapPinMainY = mapPinMain.offsetTop;
   var dataArray = [];
 
   mapFilter.classList.add('map__filters--disabled');
@@ -20,23 +21,21 @@
 
   var formElements = document.querySelectorAll('.ad-form__element');
 
-  formElements.forEach(function (formElement){
+  formElements.forEach(function (formElement) {
     var item = formElement;
     item.disabled = true;
-  })
+  });
 
   var mapFilters = document.querySelectorAll('.map__filter');
-  mapFilters.forEach(function(mapFilter) {
-    var item2 = mapFilter;
+  mapFilters.forEach(function (it) {
+    var item2 = it;
     item2.disabled = true;
-  })
-
+  });
 
   var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
   var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
 
-  address.value = leftPos + ', ' + topPos;
-
+  address.value = Math.floor(leftPos) + ', ' + Math.floor(topPos);
 
   var activateMap = function () {
     map.classList.remove('map--faded');
@@ -46,25 +45,26 @@
     formElements.forEach(function (formElement) {
       formElement.disabled = false;
     });
-    mapFilters.forEach(function (mapFilter) {
-      mapFilter.disabled = false;
-    })
+    mapFilters.forEach(function (it) {
+      it.disabled = false;
+    });
 
-    var successHandler = function (objects) {
-      dataArray = objects;
-      window.pin.createUpdatedArray(dataArray);
+
+    var onSuccess = function (objects) {
+      window.page.dataArray = objects;
+      window.pin.createUpdatedArray(objects);
     };
 
-    var errorHandler = function () {
+    var oneError = function () {
       var errorTemplate = document
-          .querySelector('#error')
-          .content
-          .querySelector('div');
+        .querySelector('#error')
+        .content
+        .querySelector('div');
 
       var errorElement = errorTemplate.cloneNode(true);
       document.body.insertAdjacentElement('afterbegin', errorElement);
     };
-    window.upload.load(successHandler, errorHandler, 'GET', URL);
+    window.upload.load(onSuccess, oneError, 'GET', URL);
   };
 
   var inactivateMap = function () {
@@ -75,18 +75,30 @@
     formElements.forEach(function (formElement) {
       formElement.disabled = true;
     });
-    mapFilters.forEach(function (mapFilter) {
-      mapFilter.disabled = true;
-    })
-  }
+    mapFilters.forEach(function (it) {
+      it.disabled = true;
+    });
+  };
+
+
+  var movePinToInitial = function () {
+    mapPinMain.style.top = (mapPinMainX + OFFSET_HEIGHT / 2) + 'px';
+    mapPinMain.style.left = (mapPinMainY + OFFSET_WIDTH / 2) + 'px';
+  };
 
 
   var calculateCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
     leftPos = elem.offsetLeft + elem.offsetWidth / 2;
-    var currentCoords = leftPos + ', ' + topPos;
+    var currentCoords = Math.floor(leftPos) + ', ' + Math.floor(topPos);
     return currentCoords;
   };
+
+  mapPinMain.addEventListener('keydown', function () {
+    if (dataArray.length === 0) {
+      activateMap();
+    }
+  });
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -144,14 +156,14 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  window.map = {
+  window.page = {
     map: map,
     dataArray: dataArray,
     activateMap: activateMap,
-    adForm: adForm,
     mapPinMain: mapPinMain,
     mapFilter: mapFilter,
-    inactivateMap: inactivateMap
+    inactivateMap: inactivateMap,
+    movePinToInitial: movePinToInitial
   };
 
 }());

@@ -16,15 +16,15 @@
     markerElement.querySelector('img').alt = 'Заголовок объявления';
 
     markerElement.addEventListener('click', function () {
-      window.card.openCard(marker);
-      markerElement.classList.add('.map__pin--active');
+      window.card.open(marker);
+      markerElement.classList.add('map__pin--active');
 
     });
 
     markerElement.addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.data.ENTER_KEYCODE) {
-        window.card.openCard();
-        markerElement.classList.add('.map__pin--active');
+        window.card.open();
+        markerElement.classList.add('map__pin--active');
       }
     });
 
@@ -39,14 +39,17 @@
   var createUpdatedArray = function (arr) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < ADS_NUMBER && i < arr.length; i++) {
-      fragment.appendChild(createMarker(arr[i]));
+      if (arr[i].offer) {
+        fragment.appendChild(createMarker(arr[i]));
+      }
     }
     mapPins.appendChild(fragment);
   };
 
   window.pin = {
-    mapPins: mapPins,
-    createUpdatedArray: createUpdatedArray
+    mainMarker: mapPins,
+    createUpdatedArray: createUpdatedArray,
   };
 
 }());
+
