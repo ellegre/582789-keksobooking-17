@@ -106,10 +106,6 @@
     resetForm();
   });
 
-
-  resetButton.addEventListener('click', function (evt) {
-    evt.preventDefault();
-
   // Unsuccessful form sending
 
   var onError = function () {
