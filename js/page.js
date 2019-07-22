@@ -82,8 +82,8 @@
 
 
   var movePinToInitial = function () {
-    mapPinMain.style.top = (mapPinMainX + OFFSET_HEIGHT / 2) + 'px';
-    mapPinMain.style.left = (mapPinMainY + OFFSET_WIDTH / 2) + 'px';
+    mapPinMain.style.top = mapPinMainY + 'px';
+    mapPinMain.style.left = mapPinMainX + 'px';
   };
 
 
