@@ -31,5 +31,4 @@
   window.upload = {
     load: load
   };
-
 })();

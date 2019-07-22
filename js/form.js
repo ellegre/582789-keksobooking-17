@@ -94,6 +94,8 @@
     window.utils.clearPins();
     window.card.close();
     window.page.movePinToInitial();
+    window.data.array = [];
+    changeCapacity();
   };
 
   adFormReset.addEventListener('click', function () {

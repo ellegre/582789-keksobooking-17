@@ -5,7 +5,6 @@
   var PIN_HEIGHT = 70;
   var PIN_WIDTH = 50;
   var ADS_NUMBER = 5;
-
   var mapPins = document.querySelector('.map__pins');
 
   var createMarker = function (marker) {
@@ -50,6 +49,4 @@
     mainMarker: mapPins,
     createUpdatedArray: createUpdatedArray,
   };
-
 }());
-

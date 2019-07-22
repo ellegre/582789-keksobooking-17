@@ -12,8 +12,6 @@
   var adFormHeader = document.querySelector('.ad-form-header');
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
-  var activePin = document.querySelector('.map__pin--active');
-  var mapPin = document.querySelector('.map__pin');
   var mapPinMainX = mapPinMain.offsetLeft;
   var mapPinMainY = mapPinMain.offsetTop;
 
@@ -35,7 +33,6 @@
 
   var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
   var leftPos = mapPinMain.offsetLeft + OFFSET_WIDTH / 2;
-
   address.value = Math.floor(leftPos) + ', ' + Math.floor(topPos);
 
   var activateMap = function () {
@@ -55,7 +52,7 @@
       window.pin.createUpdatedArray(objects);
     };
 
-    var oneError = function () {
+    var onError = function () {
       var errorTemplate = document
         .querySelector('#error')
         .content
@@ -64,7 +61,7 @@
       var errorElement = errorTemplate.cloneNode(true);
       document.body.insertAdjacentElement('afterbegin', errorElement);
     };
-    window.upload.load(onSuccess, oneError, 'GET', URL);
+    window.upload.load(onSuccess, onError, 'GET', URL);
   };
 
   var inactivateMap = function () {
@@ -80,13 +77,11 @@
     });
   };
 
-
   var movePinToInitial = function () {
     mapPinMain.style.top = mapPinMainY + 'px';
     mapPinMain.style.left = mapPinMainX + 'px';
     calculateStartCoords(mapPinMain);
   };
-
 
   var calculateCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
@@ -163,7 +158,6 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-
 
   window.page = {
     map: map,
