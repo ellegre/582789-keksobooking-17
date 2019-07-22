@@ -89,18 +89,12 @@
   // Function for inactivate forms
 
   var resetForm = function () {
+    adForm.reset();
     window.page.inactivateMap();
     window.utils.clearPins();
     window.card.close();
-    adForm.reset();
     window.page.movePinToInitial();
   };
-
-  adForm.addEventListener('reset', function (e) {
-    e.preventDefault();
-    adForm.reset();
-    window.page.movePinToInitial();
-  });
 
   adFormReset.addEventListener('click', function () {
     resetForm();

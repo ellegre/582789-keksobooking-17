@@ -84,6 +84,7 @@
   var movePinToInitial = function () {
     mapPinMain.style.top = mapPinMainY + 'px';
     mapPinMain.style.left = mapPinMainX + 'px';
+    calculateStartCoords(mapPinMain);
   };
 
 
@@ -92,6 +93,13 @@
     leftPos = elem.offsetLeft + elem.offsetWidth / 2;
     var currentCoords = Math.floor(leftPos) + ', ' + Math.floor(topPos);
     return currentCoords;
+  };
+
+  var calculateStartCoords = function (elem) {
+    topPos = elem.offsetTop + elem.offsetHeight / 2;
+    leftPos = elem.offsetLeft + elem.offsetWidth / 2;
+    var currentCoords = Math.floor(leftPos) + ', ' + Math.floor(topPos);
+    address.value = currentCoords;
   };
 
   mapPinMain.addEventListener('keydown', function () {
