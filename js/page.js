@@ -12,9 +12,10 @@
   var adFormHeader = document.querySelector('.ad-form-header');
   var address = document.querySelector('#address');
   var mapPinMain = document.querySelector('.map__pin--main');
+  var activePin = document.querySelector('.map__pin--active');
+  var mapPin = document.querySelector('.map__pin');
   var mapPinMainX = mapPinMain.offsetLeft;
   var mapPinMainY = mapPinMain.offsetTop;
-  var dataArray = [];
 
   mapFilter.classList.add('map__filters--disabled');
   adFormHeader.classList.add('ad-form-header--disabled');
@@ -49,9 +50,8 @@
       it.disabled = false;
     });
 
-
     var onSuccess = function (objects) {
-      window.page.dataArray = objects;
+      window.data.array = objects;
       window.pin.createUpdatedArray(objects);
     };
 
@@ -103,7 +103,7 @@
   };
 
   mapPinMain.addEventListener('keydown', function () {
-    if (dataArray.length === 0) {
+    if (window.data.array.length === 0) {
       activateMap();
     }
   });
@@ -153,7 +153,7 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      if (dataArray.length === 0) {
+      if (window.data.array.length === 0) {
         activateMap();
       }
       document.removeEventListener('mousemove', onMouseMove);
@@ -164,9 +164,9 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
+
   window.page = {
     map: map,
-    dataArray: dataArray,
     activateMap: activateMap,
     mapPinMain: mapPinMain,
     mapFilter: mapFilter,

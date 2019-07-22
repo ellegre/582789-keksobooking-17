@@ -56,7 +56,7 @@
   };
 
   var createFilteredMarkers = function () {
-    var myData = window.page.dataArray;
+    var myData = window.data.array;
     var pinsArray = myData.slice();
     var updateMarkers = pinsArray.filter(function (elem) {
       return filterType(elem) && filterPrice(elem) && filterRooms(elem) && filterGuests(elem) && filterFeatures(elem);

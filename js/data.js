@@ -9,6 +9,7 @@
     PIN_Y_MAX: 630,
     ESC_KEYCODE: 27,
     ENTER_KEYCODE: 13,
+    array: [],
     AccomodationType: {
       'BUNGALO': {
         price: 0,
