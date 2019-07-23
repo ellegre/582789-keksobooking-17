@@ -5,7 +5,6 @@
   var OFFSET_HEIGHT = 65;
   var OFFSET_WIDTH = 65;
   var TIP_HEIGHT = 20;
-  var URL = 'https://js.dump.academy/keksobooking/data';
   var map = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
@@ -59,7 +58,7 @@
       var errorElement = errorTemplate.cloneNode(true);
       document.body.insertAdjacentElement('afterbegin', errorElement);
     };
-    window.upload.load(onSuccess, onError, 'GET', URL);
+    window.upload.load(onSuccess, onError);
   };
 
   var inactivateMap = function () {
@@ -90,7 +89,7 @@
   var calculateStartCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight / 2;
     leftPos = elem.offsetLeft + elem.offsetWidth / 2;
-    address.value  = Math.floor(leftPos) + ', ' + Math.floor(topPos);
+    address.value = Math.floor(leftPos) + ', ' + Math.floor(topPos);
   };
 
   mapPinMain.addEventListener('keydown', function () {

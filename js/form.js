@@ -1,7 +1,6 @@
 'use strict';
 (function () {
 
-  var URL_TO_SEND = 'https://js.dump.academy/keksobooking';
   var adForm = document.querySelector('.ad-form'); // window.map.adForm
   var price = adForm.querySelector('#price');
   var type = adForm.querySelector('#type');
@@ -14,7 +13,7 @@
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.upload.load(onLoad, onError, 'POST', URL_TO_SEND, new FormData(adForm));
+    window.upload.send(onLoad, onError, new FormData(adForm));
   });
 
   // Validation of my advertisement
