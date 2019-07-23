@@ -21,14 +21,12 @@
   var formElements = document.querySelectorAll('.ad-form__element');
 
   formElements.forEach(function (formElement) {
-    var item = formElement;
-    item.disabled = true;
+    formElement.disabled = true;
   });
 
   var mapFilters = document.querySelectorAll('.map__filter');
   mapFilters.forEach(function (it) {
-    var item2 = it;
-    item2.disabled = true;
+    it.disabled = true;
   });
 
   var topPos = mapPinMain.offsetTop + OFFSET_HEIGHT / 2;
