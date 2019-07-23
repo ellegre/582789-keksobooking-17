@@ -84,15 +84,13 @@
   var calculateCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight + TIP_HEIGHT;
     leftPos = elem.offsetLeft + elem.offsetWidth / 2;
-    var currentCoords = Math.floor(leftPos) + ', ' + Math.floor(topPos);
-    return currentCoords;
+    address.value = Math.floor(leftPos) + ', ' + Math.floor(topPos);
   };
 
   var calculateStartCoords = function (elem) {
     topPos = elem.offsetTop + elem.offsetHeight / 2;
     leftPos = elem.offsetLeft + elem.offsetWidth / 2;
-    var currentCoords = Math.floor(leftPos) + ', ' + Math.floor(topPos);
-    address.value = currentCoords;
+    address.value  = Math.floor(leftPos) + ', ' + Math.floor(topPos);
   };
 
   mapPinMain.addEventListener('keydown', function () {
@@ -141,7 +139,7 @@
         mapPinMain.style.left = window.data.PIN_X_MAX - OFFSET_WIDTH + 'px';
       }
 
-      address.value = calculateCoords(mapPinMain);
+      calculateCoords(mapPinMain);
     };
 
     var onMouseUp = function (upEvt) {
